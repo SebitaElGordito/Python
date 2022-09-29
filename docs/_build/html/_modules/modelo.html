@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modelo &mdash; documentación de MiProyecto - 1.0.0</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> MiProyecto
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../controlador.html">controlador module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">modelo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../observador.html">observador module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MiProyecto</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Código de módulo</a> &raquo;</li>
+      <li>modelo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para modelo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;modelo.py&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">observador</span> <span class="kn">import</span> <span class="n">Sujeto</span>
+
+
+<div class="viewcode-block" id="Abmc"><a class="viewcode-back" href="../modelo.html#modelo.Abmc">[documentos]</a><span class="k">class</span> <span class="nc">Abmc</span><span class="p">(</span><span class="n">Sujeto</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Clase &quot;Abmc&quot; a partir de la cual se crea la conexión con la base de datos, y se gestiona la lógica de la aplicación.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Abmc.crear_base"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.crear_base">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_base</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;babuinos.db&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">con</span></div>
+
+<div class="viewcode-block" id="Abmc.crear_tabla"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.crear_tabla">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función que crea la tabla, arrojándonos que &quot;la tabla ya fue creada&quot; si esta ya existe.&quot;&quot;&quot;</span>
+        <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_base</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;CREATE TABLE IF NOT EXISTS proye (id PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, fecha VARCHAR(10) NOT NULL, hora VARCHAR(5) NOT NULL, parto VARCHAR(1) NOT NULL, sexo VARCHAR(1) NOT NULL, peso VARCHAR(5) NOT NULL, talla VARCHAR(4) NOT NULL)&quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Abmc.version"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.version">[documentos]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="s2">&quot;App Hospital Maternal Babuinos Felices.</span><span class="se">\n</span><span class="s2">Version 1.0.0&quot;</span>
+        <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Información&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">info</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Abmc.socket"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.socket">[documentos]</a>    <span class="k">def</span> <span class="nf">socket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Método para la conexión con el servidor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">9000</span>
+
+            <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+            <span class="n">sock</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
+            <span class="n">mensaje</span> <span class="o">=</span> <span class="n">mensaje</span>
+
+            <span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">mensaje</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;UTF-32&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+            <span class="n">received</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+            <span class="n">datos</span> <span class="o">=</span> <span class="n">received</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="n">datos</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;UTF-32&quot;</span><span class="p">))</span>
+
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El servidor no se encuentra en linea&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Abmc.decoradore"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.decoradore">[documentos]</a>    <span class="k">def</span> <span class="nf">decoradore</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Decorador para realizar un registro en la consola sobre de la función</span>
+<span class="sd">        llamada&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">envoltura</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;alta&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Se ha agregado un registro&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;baja&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Se ha eliminado un registro&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;actualizar&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Se ha actualizado un registro&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">envoltura</span></div>
+
+<div class="viewcode-block" id="Abmc.alta"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.alta">[documentos]</a>    <span class="nd">@decoradore</span>
+    <span class="k">def</span> <span class="nf">alta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">fecha</span><span class="p">,</span> <span class="n">hora</span><span class="p">,</span> <span class="n">parto</span><span class="p">,</span> <span class="n">sexo</span><span class="p">,</span> <span class="n">peso</span><span class="p">,</span> <span class="n">talla</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función para dar de alta nuevos registros y guardarlos en la base de datos&quot;&quot;&quot;</span>
+        <span class="n">cadena</span> <span class="o">=</span> <span class="n">parto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">patron</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;N|C&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;Regex que simplifica el ingreso de datos en &quot;tipo de parto&quot;, aceptando solo N para parto natural, o C para Cesarea, permitiendo ingresarlos tanto en minúscula o mayúscula.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">patron</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">cadena</span><span class="p">):</span>
+            <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_base</span><span class="p">()</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">apellido</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">fecha</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">hora</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">parto</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">sexo</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">peso</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">talla</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO proye(nombre, apellido, fecha, hora, parto, sexo, peso, talla) VALUES(?, ?, ?, ?, ?, ?, ?, ?)&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limpiarcampos</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">fecha</span><span class="p">,</span> <span class="n">hora</span><span class="p">,</span> <span class="n">parto</span><span class="p">,</span> <span class="n">sexo</span><span class="p">,</span> <span class="n">peso</span><span class="p">,</span> <span class="n">talla</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">consultar</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Se ha agregado al babuino de Nombre: </span><span class="si">{</span><span class="n">nombre</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">  Apellido: </span><span class="si">{</span><span class="n">apellido</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2"> con fecha de nacimiento:  </span><span class="si">{</span><span class="n">fecha</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">  hora de nacimiento: </span><span class="si">{</span><span class="n">hora</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2"> tipo de parto:  </span><span class="si">{</span><span class="n">parto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2"> sexo:  </span><span class="si">{</span><span class="n">sexo</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2"> con un peso en gramos de: </span><span class="si">{</span><span class="n">peso</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2"> y una talla en centímetros de: </span><span class="si">{</span><span class="n">talla</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notificar</span><span class="p">(</span>
+                <span class="n">nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">apellido</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">fecha</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">hora</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">parto</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">sexo</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">peso</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">talla</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">sql</span><span class="p">:</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="s2">&quot;Guardado en la base de datos&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;El babuino &quot;</span> <span class="o">+</span> <span class="n">nombre</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; ha sido agregado exitosamente&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
+                <span class="s2">&quot;ERROR FATAL&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Error al ingresar los datos... por favor ingrese el parto Natural como &#39;N&#39; o &#39;n&#39; y Cesarea como &#39;C&#39; o &#39;c&#39;&quot;</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Abmc.limpiarcampos"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.limpiarcampos">[documentos]</a>    <span class="k">def</span> <span class="nf">limpiarcampos</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nombre</span><span class="p">,</span>
+        <span class="n">apellido</span><span class="p">,</span>
+        <span class="n">fecha</span><span class="p">,</span>
+        <span class="n">hora</span><span class="p">,</span>
+        <span class="n">parto</span><span class="p">,</span>
+        <span class="n">sexo</span><span class="p">,</span>
+        <span class="n">peso</span><span class="p">,</span>
+        <span class="n">talla</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función que se encarga de limpiar los campos de entrada, borrando los datos allí ingresados, una vez que se presiona algunos de los botones del Crud, y se realiza una acción.&quot;&quot;&quot;</span>
+        <span class="n">nombre</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">apellido</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">fecha</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">))</span>
+        <span class="n">hora</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M&quot;</span><span class="p">))</span>
+        <span class="n">parto</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">sexo</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">peso</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">talla</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Abmc.baja"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.baja">[documentos]</a>    <span class="nd">@decoradore</span>
+    <span class="k">def</span> <span class="nf">baja</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función que sirve para eliminar los datos del registro seleccionado en pantalla. Necesita confirmación para ejecutar la acción.&quot;&quot;&quot;</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askquestion</span><span class="p">(</span>
+            <span class="s2">&quot;El campo será eliminado de forma permanente...&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;¿Realmente desea eliminar el campo seleccionado?&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_base</span><span class="p">()</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="nb">id</span><span class="p">,)</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;DELETE FROM proye WHERE ID= ?;&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="s2">&quot;Campo Eliminado&quot;</span><span class="p">,</span> <span class="s2">&quot;El babuino ha sido eliminado de forma permanente&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Abmc.consultar"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.consultar">[documentos]</a>    <span class="k">def</span> <span class="nf">consultar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función que permite mostrar en la pantalla de la app, toda la información existente hasta el momento en la base de datos.&quot;&quot;&quot;</span>
+        <span class="n">records</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM proye ORDER BY ID ASC&quot;</span>
+        <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_base</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">datos</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+        <span class="n">resultado</span> <span class="o">=</span> <span class="n">datos</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">resultado</span><span class="p">:</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">fila</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">(</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+                    <span class="n">fila</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                <span class="p">),</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Abmc.seleccion"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.seleccion">[documentos]</a>    <span class="k">def</span> <span class="nf">seleccion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">fecha</span><span class="p">,</span> <span class="n">hora</span><span class="p">,</span> <span class="n">parto</span><span class="p">,</span> <span class="n">sexo</span><span class="p">,</span> <span class="n">peso</span><span class="p">,</span> <span class="n">talla</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función para seleccionar uno de los registros. Ésta función es necesaria para la función &quot;borrar&quot;, permitiendole eliminar el registro seleccionado previamente, y para la función &quot;actualizar&quot;, permitiéndole modificar los datos de ese registro seleccionado.&quot;&quot;&quot;</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+        <span class="n">nombre</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">apellido</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">fecha</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">hora</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">parto</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="n">sexo</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">5</span><span class="p">])</span>
+        <span class="n">peso</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">6</span><span class="p">])</span>
+        <span class="n">talla</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">7</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Abmc.actualizar"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.actualizar">[documentos]</a>    <span class="nd">@decoradore</span>
+    <span class="k">def</span> <span class="nf">actualizar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">apellido</span><span class="p">,</span> <span class="n">fecha</span><span class="p">,</span> <span class="n">hora</span><span class="p">,</span> <span class="n">parto</span><span class="p">,</span> <span class="n">sexo</span><span class="p">,</span> <span class="n">peso</span><span class="p">,</span> <span class="n">talla</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función con la que se modifican los datos de un registro previamente seleccionado en la pantalla de la aplicación.&quot;&quot;&quot;</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span>
+            <span class="n">valor</span><span class="p">,</span>
+            <span class="n">values</span><span class="o">=</span><span class="p">(</span>
+                <span class="n">nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">apellido</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">fecha</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">hora</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">parto</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">sexo</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">peso</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">talla</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_base</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">apellido</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">fecha</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">hora</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">parto</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">sexo</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">peso</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">talla</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="nb">id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;UPDATE proye SET nombre=?, apellido=?, fecha=?, hora=?, parto=?, sexo=?, peso=?, talla=? WHERE id=?;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consultar</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="s2">&quot;Actualización de datos...&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Los datos del babuino han sido actualizados exitosamente&quot;</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Abmc.salir"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.salir">[documentos]</a>    <span class="k">def</span> <span class="nf">salir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_tk</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Función que permite cerrar la aplicación cuando el usuario presiona el botón &quot;Salir&quot;. Necesita confirmación.&quot;&quot;&quot;</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askquestion</span><span class="p">(</span>
+            <span class="s2">&quot;Saliendo de la aplicación...&quot;</span><span class="p">,</span> <span class="s2">&quot;¿Realmente desea salir?&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">root_tk</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2022, Sebastian_vazquez.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
